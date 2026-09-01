@@ -1,6 +1,6 @@
 package Dominio;
 
-public class PaisDominio {
+public class CiudadDominio {
 
 
 }

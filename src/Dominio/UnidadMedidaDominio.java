@@ -1,4 +1,6 @@
 package Dominio;
 
-public class PaisDominio {
+public class UnidadMedidaDominio {
+
+
 }

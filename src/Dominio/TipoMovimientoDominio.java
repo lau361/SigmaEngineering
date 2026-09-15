@@ -5,12 +5,12 @@ import Crosscuting.Utilitario.UtilTexto;
 
 import java.util.UUID;
 
-public class OrigenDominio {
+public class TipoMovimientoDominio {
 
     private UUID id;
     private String nombre;
 
-    private OrigenDominio(Builder builder) {
+    private TipoMovimientoDominio(Builder builder) {
         this.id = builder.id;
         this.nombre = builder.nombre;
     }
@@ -44,8 +44,8 @@ public class OrigenDominio {
             return this;
         }
 
-        public OrigenDominio build() {
-            return new OrigenDominio(this);
+        public TipoMovimientoDominio build() {
+            return new TipoMovimientoDominio(this);
         }
     }
 }

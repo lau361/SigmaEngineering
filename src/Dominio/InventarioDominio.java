@@ -1,6 +1,7 @@
 package Dominio;
 
 import Crosscuting.Utilitario.UtilId;
+import Crosscuting.Utilitario.UtilNumero;
 import Crosscuting.Utilitario.UtilObjeto;
 
 import java.math.BigDecimal;
@@ -75,11 +76,14 @@ public class InventarioDominio {
         }
 
         public Builder cantidadTotal(BigDecimal cantidadTotal) {
-            this.cantidadTotal = UtilObjeto
+            var cantidadTotalSaneada = UtilObjeto
                     .obtenerValorDefectoSiValorOriginalEsNulo(
                             cantidadTotal,
                             BigDecimal.ZERO
                     );
+            this.cantidadTotal = UtilNumero.menorQue(cantidadTotalSaneada, BigDecimal.ZERO)
+                    ? BigDecimal.ZERO
+                    : cantidadTotalSaneada;
             return this;
         }
 
@@ -106,11 +110,14 @@ public class InventarioDominio {
         }
 
         public Builder stockMinimo(BigDecimal stockMinimo) {
-            this.stockMinimo = UtilObjeto
+            var stockMinimoSaneado = UtilObjeto
                     .obtenerValorDefectoSiValorOriginalEsNulo(
                             stockMinimo,
                             BigDecimal.ZERO
                     );
+            this.stockMinimo = UtilNumero.menorQue(stockMinimoSaneado, BigDecimal.ZERO)
+                    ? BigDecimal.ZERO
+                    : stockMinimoSaneado;
             return this;
         }
 

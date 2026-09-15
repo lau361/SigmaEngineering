@@ -2,6 +2,7 @@ package Dominio;
 
 import Crosscuting.Utilitario.UtilFecha;
 import Crosscuting.Utilitario.UtilId;
+import Crosscuting.Utilitario.UtilNumero;
 import Crosscuting.Utilitario.UtilObjeto;
 
 import java.math.BigDecimal;
@@ -94,11 +95,14 @@ public class VentaDominio {
         }
 
         public Builder total(BigDecimal total) {
-            this.total = UtilObjeto
+            var totalSaneado = UtilObjeto
                     .obtenerValorDefectoSiValorOriginalEsNulo(
                             total,
                             BigDecimal.ZERO
                     );
+            this.total = UtilNumero.menorQue(totalSaneado, BigDecimal.ZERO)
+                    ? BigDecimal.ZERO
+                    : totalSaneado;
             return this;
         }
 

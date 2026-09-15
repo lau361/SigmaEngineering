@@ -17,14 +17,14 @@ public class UtilFecha {
 
     //ahora si el año es posible
     public static boolean YearPosible(int year){
-        return UtilNumero.obtenerValorDefecto(year).doubleValue() >1000 && UtilNumero.obtenerValorDefecto(year).doubleValue() < 2100;
+        return UtilNumero.obtenerValorDefecto(year).doubleValue() >=1000 && UtilNumero.obtenerValorDefecto(year).doubleValue() <= 2100;
     }
     public static boolean FechaValida(int dia, int mes,int year){
         return DiaPosible(dia) && MesPosible(mes) && YearPosible(year);
     }
     public static LocalDate ValorPorDefecto(int dia, int mes, int year){
          return FechaValida(dia, mes, year)
-             ? LocalDate.of(dia, mes, year) : LocalDate.of(1000,1,1);
+             ? LocalDate.of(year, mes, dia) : LocalDate.of(1000,1,1);
 
     }
 

@@ -2,6 +2,7 @@ package Dominio;
 
 import Crosscuting.Utilitario.UtilFecha;
 import Crosscuting.Utilitario.UtilId;
+import Crosscuting.Utilitario.UtilNumero;
 import Crosscuting.Utilitario.UtilObjeto;
 
 import java.math.BigDecimal;
@@ -116,11 +117,15 @@ public class MovimientoInventarioDominio {
         }
 
         public Builder cantidad(BigDecimal cantidad) {
-            this.cantidad = UtilObjeto
+            var cantidadSaneada = UtilObjeto
                     .obtenerValorDefectoSiValorOriginalEsNulo(
                             cantidad,
                             BigDecimal.ZERO
                     );
+
+            this.cantidad = UtilNumero.menorQue(cantidadSaneada, BigDecimal.ZERO)
+                    ? BigDecimal.ZERO
+                    : cantidadSaneada;
 
             return this;
         }

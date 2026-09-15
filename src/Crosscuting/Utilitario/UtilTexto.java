@@ -46,6 +46,11 @@ public class UtilTexto {
         return vacia.equals(texto);
     }
 
+    public boolean esCorreoValido(String correo) {
+        return quitarEspaciosEnBlanco(correo)
+                .matches("^[\\w.+-]+@[\\w-]+\\.[a-zA-Z]{2,}$");
+    }
+
 
     public static String obtenerValorDefecto(String valor, String valorDefecto) {
         return UtilObjeto.obtenerValorDefectoSiValorOriginalEsNulo(valor, valorDefecto);

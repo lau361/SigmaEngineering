@@ -1,6 +1,7 @@
 package Dominio;
 
 import Crosscuting.Utilitario.UtilId;
+import Crosscuting.Utilitario.UtilNumero;
 import Crosscuting.Utilitario.UtilObjeto;
 
 import java.math.BigDecimal;
@@ -81,7 +82,7 @@ public class DetalleVentaDominio {
         }
 
         public Builder cantidad(int cantidad) {
-            this.cantidad = cantidad;
+            this.cantidad = UtilNumero.menorQue(cantidad, 0) ? 0 : cantidad;
             return this;
         }
 
@@ -95,20 +96,26 @@ public class DetalleVentaDominio {
         }
 
         public Builder precioProducto(BigDecimal precioProducto) {
-            this.precioProducto = UtilObjeto
+            var precioProductoSaneado = UtilObjeto
                     .obtenerValorDefectoSiValorOriginalEsNulo(
                             precioProducto,
                             BigDecimal.ZERO
                     );
+            this.precioProducto = UtilNumero.menorQue(precioProductoSaneado, BigDecimal.ZERO)
+                    ? BigDecimal.ZERO
+                    : precioProductoSaneado;
             return this;
         }
 
         public Builder subtotal(BigDecimal subtotal) {
-            this.subtotal = UtilObjeto
+            var subtotalSaneado = UtilObjeto
                     .obtenerValorDefectoSiValorOriginalEsNulo(
                             subtotal,
                             BigDecimal.ZERO
                     );
+            this.subtotal = UtilNumero.menorQue(subtotalSaneado, BigDecimal.ZERO)
+                    ? BigDecimal.ZERO
+                    : subtotalSaneado;
             return this;
         }
 

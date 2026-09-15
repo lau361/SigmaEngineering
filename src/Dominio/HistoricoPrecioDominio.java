@@ -2,6 +2,7 @@ package Dominio;
 
 import Crosscuting.Utilitario.UtilFecha;
 import Crosscuting.Utilitario.UtilId;
+import Crosscuting.Utilitario.UtilNumero;
 import Crosscuting.Utilitario.UtilObjeto;
 
 import java.math.BigDecimal;
@@ -75,11 +76,14 @@ public class HistoricoPrecioDominio {
         }
 
         public Builder precio(BigDecimal precio) {
-            this.precio =
+            var precioSaneado =
                     UtilObjeto.obtenerValorDefectoSiValorOriginalEsNulo(
                             precio,
                             BigDecimal.ZERO
                     );
+            this.precio = UtilNumero.menorQue(precioSaneado, BigDecimal.ZERO)
+                    ? BigDecimal.ZERO
+                    : precioSaneado;
             return this;
         }
 
